@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[CocoaPods的各种姿势（基础篇）]]></title>
+      <url>/2016/10/31/CocoaPods%E7%9A%84%E5%90%84%E7%A7%8D%E5%A7%BF%E5%8A%BF%EF%BC%88%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%89/</url>
+      <content type="html"><![CDATA[<h1 id="CocoaPods的各种姿势（基础篇）"><a href="#CocoaPods的各种姿势（基础篇）" class="headerlink" title="CocoaPods的各种姿势（基础篇）"></a>CocoaPods的各种姿势（基础篇）</h1><h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><p>​    CocoaPods是一个十分强大的iOS依赖管理工具，为我们提供便捷的管理第三方库的方式。在项目实际开发过程中，免不了使用各种第三方的开源类库、集成第三方的SDK，如AFNetWorking、FMDB等等，我们可以把这些公共组件交给它去管理。</p>
+<p>​    如果你之前有了解java的Maven或者nodejs的npm，那么你能更轻易的了解CocoaPods这个工具。</p>
+<h2 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods"></a>安装CocoaPods</h2><p>在 OS X 下安装CocoaPods十分简单，只需要打开terminal输入如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo gem install cocoapods</div><div class="line">$ pod setup</div></pre></td></tr></table></figure>
+<p>CocoaPods在<a href="https://rubygems.org/托管，所以在国内下载很慢，我们需要替换我们能访问到的源，如果你已经是墙外用户可以忽略下面步骤：" target="_blank" rel="external">https://rubygems.org/托管，所以在国内下载很慢，我们需要替换我们能访问到的源，如果你已经是墙外用户可以忽略下面步骤：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/</div></pre></td></tr></table></figure>
+<h3 id="使用CocoaPods的镜像索引"><a href="#使用CocoaPods的镜像索引" class="headerlink" title="使用CocoaPods的镜像索引"></a>使用CocoaPods的镜像索引</h3><p>​    如果pod setup会等比较久，如果太长时间没有反应，可以尝试使用CocoaPods的镜像索引来提高下载速度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ pod repo remove master</div><div class="line">$ pod repo add master https://gitcafe.com/akuandev/Specs.git</div><div class="line">$ pod repo update</div></pre></td></tr></table></figure>
+<h2 id="在一个Xcode工程下使用CocoaPods"><a href="#在一个Xcode工程下使用CocoaPods" class="headerlink" title="在一个Xcode工程下使用CocoaPods"></a>在一个Xcode工程下使用CocoaPods</h2><ul>
+<li><p>打开Terminal，<code>$ cd</code> 到 Xcode 工程根目录。</p>
+</li>
+<li><p>使用<code>$ pod init</code>命令创建Podfile文件。</p>
+</li>
+<li><p>打开Podfile，首先指定支持的平台和版本，例如：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; platform :ios, &apos;9.0&apos;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>新的版本中需要指定 Xcode target，例如：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; target &apos;MyApp&apos; do</div><div class="line">&gt;   pod &apos;AFNetworking&apos;</div><div class="line">&gt; end</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>这样一个Podfile文件就写好了，保存并执行<code>$ pod install</code>命令。</p>
+</li>
+</ul>
+<ul>
+<li>这时候Xcode根目录会生成一个.xcworkspace的文件，指定的库就集成好了。</li>
+</ul>
+<h2 id="pod-install-amp-pod-update区别"><a href="#pod-install-amp-pod-update区别" class="headerlink" title="pod install &amp; pod update区别"></a>pod install &amp; pod update区别</h2><p>刚接触 CocoaPods 的开发者会经常分不清这两者的区别。</p>
+<ul>
+<li><p>pod install：</p>
+<blockquote>
+<ul>
+<li>在项目安装新的pod中使用，会安装指定的第三方库。</li>
+<li>新添加库，pod install会对曾经添加的库默认使用现有的版本，无需下载，对于新添加的库会下载安装。耗时短。</li>
+</ul>
+</blockquote>
+</li>
+<li><p>pod update：</p>
+<blockquote>
+<ul>
+<li>使用pod update会对所有的库进行版本校验，如果发现更新则下载更新。耗时长。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="管理Pods依赖库版本"><a href="#管理Pods依赖库版本" class="headerlink" title="管理Pods依赖库版本"></a>管理Pods依赖库版本</h2><p>通过下面的方式，可以很轻易的对库的版本进行管理：</p>
+<ul>
+<li>pod ‘AFNetworking’ //不显式指定依赖库版本，表示每次都获取最新版本</li>
+<li>pod ‘AFNetworking’, ‘2.0’ //只使用2.0版本</li>
+<li>pod ‘AFNetworking’, ‘&gt; 2.0’ //使用大于2.0的版本</li>
+<li>pod ‘AFNetworking’, ‘&gt;= 2.0’ //使用大于或等于2.0的版本</li>
+<li>pod ‘AFNetworking’, ‘&lt; 2.0’ //使用小于2.0的版本</li>
+<li>pod ‘AFNetworking’, ‘&lt;= 2.0’ //使用小于或等于2.0的版本</li>
+<li>pod ‘AFNetworking’, ‘~&gt; 0.1.2’ //使用大于等于0.1.2但小于0.2的版本</li>
+<li>pod ‘AFNetworking’, ‘~&gt; 0.1’ //使用大于等于0.1但小于1.0的版本</li>
+<li>pod ‘AFNetworking’, ‘~&gt; 0’ //使用大于0的版本，和什么都不写效果相同</li>
+</ul>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[CocoaPods 配置]]></title>
+      <url>/2016/09/05/CocoaPods%20%E7%9B%B8%E5%85%B3/</url>
+      <content type="html"><![CDATA[<p>#CocoaPods 配置</p>
+<p>##一.CocoaPods   安装</p>
+<p>1.<code>gem sources --remove https://rubygems.org/</code></p>
+<p>如果出现:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR:  While executing gem ... (Errno::EACCES)</div><div class="line">    Permission denied - /Users/chenyuanyuan/.gemrc</div></pre></td></tr></table></figure>
+<p>使用<code>sudo</code> 试一次</p>
+<p>2.<code>gem sources -a http://ruby.taobao.org/</code></p>
+<p>3.<code>gem sources -l</code></p>
+<p>4.<code>sudo gem install cocoapods</code></p>
+<p>(可以使用<code>cd ~/.cocoapods</code>目录下<br>使用<code>du -sh *</code>来查看下载进度)</p>
+<p>5.<code>pod setup</code></p>
+<p>注意:如果出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[!] /usr/bin/git clone &apos;https://github.com/CocoaPods/Specs.git&apos; master --depth=1</div><div class="line"></div><div class="line">xcrun: error: active developer path (&quot;/Users/vision/Desktop/Xcode.app/Contents/Developer&quot;) does not exist, use xcode-select to change</div></pre></td></tr></table></figure>
+<p>使用:<br><code>sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer</code> (Xcode.app为名字)</p>
+<p>##二. 使用CocoaPods的镜像索引<br>1.<code>pod repo remove master</code></p>
+<p>2.<code>pod repo add master https://gitcafe.com/akuandev/Specs.git</code></p>
+<p>3.<code>pod repo update</code></p>
+<p>或者将上网址替换:<code>https://git.oschina.net/akuandev/Specs.git</code></p>
+<p>##三.使用CocoaPods<br>新建一个名字为 <code>Podfile</code></p>
+<p>可以使用 <code>touch Podfile</code></p>
+<p>例如:安装SBJson</p>
+<p>1.在<code>Podfile</code>中写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">platform :ios</div><div class="line"></div><div class="line">pod &apos;SBJson&apos;, &apos;~&gt; 4.0.1’</div></pre></td></tr></table></figure>
+<p>使用命令 <code>pod install</code></p>
+<p>##四:使用CocoaPods错误处理<br>错误1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[!] The platform of the target `Pods` (iOS 4.3) is not compatible with `SBJson (4.0.1)` which has a minimum requirement of iOS 5.0 - OS X 10.7.</div></pre></td></tr></table></figure>
+<p>解决方法:改为  <code>platform :ios, ‘8.0’</code></p>
+<p>错误2: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal: Not a git repository (or any of the parent directories): .git</div></pre></td></tr></table></figure>
+<p>解决方法: 使用命令 <code>git init</code></p>
+<p>错误3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[!] Invalid `Podfile` file: incompatible character encodings: UTF-8 and ASCII-8BIT. Updating CocoaPods might fix the issue.</div></pre></td></tr></table></figure>
+<p>查看编码,执行命令<br><code>locale</code></p>
+<p>执行命令后出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">LANG=&quot;zh_CN.UTF-8&quot;</div><div class="line">LC_COLLATE=&quot;zh_CN.UTF-8&quot;</div><div class="line">LC_CTYPE=&quot;zh_CN.UTF-8&quot;</div><div class="line">LC_MESSAGES=&quot;zh_CN.UTF-8&quot;</div><div class="line">LC_MONETARY=&quot;zh_CN.UTF-8&quot;</div><div class="line">LC_NUMERIC=&quot;zh_CN.UTF-8&quot;</div><div class="line">LC_TIME=&quot;zh_CN.UTF-8&quot;</div><div class="line">LC_ALL=</div></pre></td></tr></table></figure>
+<p>发现都是zh，强制设置一下,命令:</p>
+<p><code>export LC_ALL=en_US.UTF-8</code></p>
+<p><code>export LANG=en_US.UTF-8</code></p>
+<p>再检查一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">LANG=&quot;en_US.UTF-8&quot;</div><div class="line">LC_COLLATE=&quot;en_US.UTF-8&quot;</div><div class="line">LC_CTYPE=&quot;en_US.UTF-8&quot;</div><div class="line">LC_MESSAGES=&quot;en_US.UTF-8&quot;</div><div class="line">LC_MONETARY=&quot;en_US.UTF-8&quot;</div><div class="line">LC_NUMERIC=&quot;en_US.UTF-8&quot;</div><div class="line">LC_TIME=&quot;en_US.UTF-8&quot;</div><div class="line">LC_ALL=&quot;en_US.UTF-8&quot;</div></pre></td></tr></table></figure>
+<p>好像好了，继续pod install吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[!] Invalid `Podfile` file: incompatible character encodings: UTF-8 and ASCII-8BIT. Updating CocoaPods might fix the issue.</div></pre></td></tr></table></figure>
+<p>问题依然<br>把所有可能的配置都试一遍<br><code>gem install rails</code></p>
+<p>然后<br><code>gem install rdoc</code></p>
+<p>然后<br><code>gem install nokogiri --no-ri --no-rdoc</code></p>
+<p>这些都设置完一般不会出现问题了，再有问题，可能是文本录入的问题</p>
+<p>OK 如果你还有问题 试试下面的 :</p>
+<p><code>打开系统偏好设置 - 键盘 - 文本</code></p>
+<p>改成上面的样式<br> ok如果你还有问题 那就再终端上敲吧</p>
+<p><code>vim Podfile</code><br>按 <code>i</code>输入 </p>
+<p>输入结束后 </p>
+<p>按<code>esc+ shift+;</code>输入<code>wq</code> 回车<br>ok</p>
+<p>如果你还有问题 那别玩iOS了 玩别的去吧!(玩笑)</p>
+]]></content>
+      
+        
+    </entry>
+    
+  
+  
+    
+  
+</search>
