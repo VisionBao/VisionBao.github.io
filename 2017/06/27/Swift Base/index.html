@@ -10,7 +10,7 @@
     
     <title>
         
-            CocoaPods的各种姿势（基础篇） | 
+            Swift Base | 
         
         VisionBao&#39;s blog
     </title>
@@ -64,7 +64,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.visionbao.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="CocoaPods的各种姿势（基础篇） | VisionBao&#39;s blog">
+    <meta property="og:title" content="Swift Base | VisionBao&#39;s blog">
     <meta property="og:description" content="visionbao iOS Cocoapods github xcode develop">
     
 
@@ -272,7 +272,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CocoaPods的各种姿势（基础篇）"><span class="post-toc-number">1.</span> <span class="post-toc-text">CocoaPods的各种姿势（基础篇）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概况"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概况</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装CocoaPods"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">安装CocoaPods</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用CocoaPods的镜像索引"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">使用CocoaPods的镜像索引</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在一个Xcode工程下使用CocoaPods"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">在一个Xcode工程下使用CocoaPods</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#pod-install-amp-pod-update区别"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">pod install & pod update区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#管理Pods依赖库版本"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">管理Pods依赖库版本</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Swift-Base"><span class="post-toc-number">1.</span> <span class="post-toc-text">Swift Base</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#let"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">let</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#var"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">var</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Array"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Array</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Modifying-an-Array"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Modifying an Array</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#add"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">add</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#remove"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">remove</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#update"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">update</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dictionary"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Dictionary</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Modifying-an-dictionary"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">Modifying an dictionary</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Loops"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">Loops</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#While-amp-Repeat-While"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">While & Repeat-While</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#For-In"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">For-In</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#if"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">if</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#switch"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">switch</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -309,7 +309,7 @@
         
     
             <p class="article-headline-p">
-                CocoaPods的各种姿势（基础篇）
+                Swift Base
             </p>
         </div>
 
@@ -328,7 +328,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>VisionBao</strong>
-        <span>10月 31, 2016</span>
+        <span>6月 27, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -349,7 +349,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADj0lEQVR42u3aS26DUAwF0Ox/0+20UhR6bT8nVD2MooQCPgxcfx5fjh/HAwEOHDhw4MCBAwcOHDfmeMTHz/OfPz9fM/n++sqv7l799dX5OHDgwIFjj+OXVBSccx3G86+9sHPQPBYcOHDgwLHHkSTX3l+9CiZJt3l4zVhw4MCBA8dHOXKm6+RaLQh7SRcHDhw4cPwVjkm7sFqM9UBx4MCBA8cdOKplUtLyKzTp4sSZX2G9V4oDBw4cONYWGu7z+Rb7HThw4MDxjzmqx+E1tVYyzhcsoohw4MCBA8dRjmo7L19NqKbzhKCXYg9UtDhw4MCBI+aYD3J6w6TeC6imWBw4cODA8X6OPDUmibM6mqqm/Cpx9MJw4MCBA8dRjt6N58kvXz6Yl384cODAgeP9HHkqzVtvpwZOefuyOcrCgQMHDhxHOXrLcHlDMF+DSK5ZXeOLkjEOHDhw4FjgmKwFVEGTdmShtddasMCBAwcOHHscyRhpUjIVmnQxXK/kK1e0OHDgwIHjUHNwUtRV1xcmqxLV5NocO+HAgQMHjgFHXkT12n+9AVLv9RQGYDhw4MCB4yjHfGwzCTvnS87MB1E4cODAgWOPYyP4U7/mCw2jO+LAgQMHjgWOfBDVI5uMjq4HVPk1CwsNOHDgwIFjwJEPb+aPdTZBVpuA0UIDDhw4cOBY4KiurOXNuHwVb/KE+ZIfDhw4cODY4EjS4UYbMf8mebbqqgQOHDhw4NjjqJZG1+2/3tAoLwurf4sDBw4cON7PMXmU+cDpVFpdWWjAgQMHDhyHOJJH6aHkbcQcd/49Dhw4cOA4y5GPlHpDpiSwpNDKFyPye+HAgQMHjndyVG+2kZirlM3UiwMHDhw41jh6LbleSBs0zeSNAwcOHDiOcuQ0yfdJ6TUfTfU4RgsNOHDgwIFjwDFfVquGnReHOUoCjQMHDhw4Njh6SwxV0HwglISXlJ35vwI4cODAgeMsR/VIEm2y4pAPqCYLdtEz48CBAweOoxyP+JiXW5O1g+SVVHFx4MCBA8ceRz74mT9WtTzrtTKbYyccOHDgwHGUY5JcewVeniDzpJuvSuDAgQMHjjtw5GlvkmKTgPP1iPIUDgcOHDhwfJQjOX8S9vXqQzmt5s1BHDhw4MAx5ug1BxPKJKQErjrQis7HgQMHDhwLHPOFhuuAq3fM4arXiUo4HDhw4MAx4HDgwIEDBw4cOHDgwIHjZsc3JB00zU4A0iUAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACWElEQVR42u3aUU7DMBAE0N7/0nCChhmv64Tq5QtB0/gVybsd7+vnq68XHh4eHh4eHh7ew3iv+Lq+649HbnpKdBceHh7eEV6yuPY17Uew7bl4eHh4B3nvFvTuNde/Sd5/ci8eHh7eN/GShb4rIZO14eHh4T2Z14YObQnBw8PD+y+85At/2yJfb/2Py1rw8PDwYl5+yHT+56Pne3h4eHgBb+1Q6nqjX2vB82JQDF3h4eHhfYA3b5HbiLYNfJP14OHh4d3Fyx+Wb/RrAXE7wIqHh4d3L28UBJRBxjzsqAsDHh4e3ibedXlI2uW2vd57Lx4eHt5JXhIZ5ONQOTspSEkJwcPDwzvPyw+c9g4WrJWi5BAODw8P7wm8ybFWElvsavHx8PDwTvLmLW/yocxj4g0xLh4eHt4mXl4A2nKSDxwkYUdUMPDw8PAO8hJY8tc18Fp0i4eHh3cXrx2imuMnIe/iNwY8PDy8I7y1MKKNYuelAg8PD+8kL3nYYmubb+XJEGoeH+Ph4eF9mNcuog1/23a8HSwYpdR4eHh4W3n5cMBapJu0zh8sDHh4eHhbeXmpaJfetu/tSCseHh7eXbw8um0P+5Px0/noKh4eHt6neXs3+klQm7//H2UDDw8P78O8tcg1H9KaxBBtOIKHh4d3krdrEfPQNi8MeHh4eE/gJSOhyWFVvaA4jIj+GXh4eHiP5OVD+e2xVruqOqXGw8PDu4m3tt23Ie9a+46Hh4d3kpcfes1LyHyYAA8PD+9e3trW3LbXbTOdrBAPDw/vPO/7Ljw8PDw8PDw8vAdcv75IDDdTSjjhAAAAAElFTkSuQmCC">
         </ul>
     
 
@@ -375,7 +375,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2016/10/31/CocoaPods的各种姿势（基础篇）/" class="leancloud-views_num" data-flag-title="CocoaPods的各种姿势（基础篇）">
+                <span id="/2017/06/27/Swift Base/" class="leancloud-views_num" data-flag-title="Swift Base">
      &nbsp;浏览量
 </span>
 
@@ -387,7 +387,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=CocoaPods的各种姿势（基础篇）&url=http://www.visionbao.com//2016/10/31/CocoaPods的各种姿势（基础篇）/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Swift Base&url=http://www.visionbao.com//2017/06/27/Swift Base/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -396,7 +396,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=CocoaPods的各种姿势（基础篇）&url=http://www.visionbao.com//2016/10/31/CocoaPods的各种姿势（基础篇）/index.html&via=VisionBao" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Swift Base&url=http://www.visionbao.com//2017/06/27/Swift Base/index.html&via=VisionBao" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -405,7 +405,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.visionbao.com//2016/10/31/CocoaPods的各种姿势（基础篇）/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.visionbao.com//2017/06/27/Swift Base/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -414,7 +414,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.visionbao.com//2016/10/31/CocoaPods的各种姿势（基础篇）/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.visionbao.com//2017/06/27/Swift Base/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -426,7 +426,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=VisionBao&#39;s blog&title=CocoaPods的各种姿势（基础篇）&summary=visionbao iOS Cocoapods github xcode develop&pics=http://www.visionbao.com/img/favicon.png&url=http://www.visionbao.com/2016/10/31/CocoaPods的各种姿势（基础篇）/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=VisionBao&#39;s blog&title=Swift Base&summary=visionbao iOS Cocoapods github xcode develop&pics=http://www.visionbao.com/img/favicon.png&url=http://www.visionbao.com/2017/06/27/Swift Base/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -444,65 +444,28 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="CocoaPods的各种姿势（基础篇）"><a href="#CocoaPods的各种姿势（基础篇）" class="headerlink" title="CocoaPods的各种姿势（基础篇）"></a>CocoaPods的各种姿势（基础篇）</h1><h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><p>​    CocoaPods是一个十分强大的iOS依赖管理工具，为我们提供便捷的管理第三方库的方式。在项目实际开发过程中，免不了使用各种第三方的开源类库、集成第三方的SDK，如AFNetWorking、FMDB等等，我们可以把这些公共组件交给它去管理。</p>
-<p>​    如果你之前有了解java的Maven或者nodejs的npm，那么你能更轻易的了解CocoaPods这个工具。</p>
-<h2 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods"></a>安装CocoaPods</h2><p>在 OS X 下安装CocoaPods十分简单，只需要打开terminal输入如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo gem install cocoapods</div><div class="line">$ pod setup</div></pre></td></tr></table></figure>
-<p>CocoaPods在<a href="https://rubygems.org/托管，所以在国内下载很慢，我们需要替换我们能访问到的源，如果你已经是墙外用户可以忽略下面步骤：" target="_blank" rel="external">https://rubygems.org/托管，所以在国内下载很慢，我们需要替换我们能访问到的源，如果你已经是墙外用户可以忽略下面步骤：</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/</div></pre></td></tr></table></figure>
-<h3 id="使用CocoaPods的镜像索引"><a href="#使用CocoaPods的镜像索引" class="headerlink" title="使用CocoaPods的镜像索引"></a>使用CocoaPods的镜像索引</h3><p>​    如果pod setup会等比较久，如果太长时间没有反应，可以尝试使用CocoaPods的镜像索引来提高下载速度。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ pod repo remove master</div><div class="line">$ pod repo add master https://gitcafe.com/akuandev/Specs.git</div><div class="line">$ pod repo update</div></pre></td></tr></table></figure>
-<h2 id="在一个Xcode工程下使用CocoaPods"><a href="#在一个Xcode工程下使用CocoaPods" class="headerlink" title="在一个Xcode工程下使用CocoaPods"></a>在一个Xcode工程下使用CocoaPods</h2><ul>
-<li><p>打开Terminal，<code>$ cd</code> 到 Xcode 工程根目录。</p>
-</li>
-<li><p>使用<code>$ pod init</code>命令创建Podfile文件。</p>
-</li>
-<li><p>打开Podfile，首先指定支持的平台和版本，例如：</p>
-<blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; platform :ios, &apos;9.0&apos;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-</li>
-<li><p>新的版本中需要指定 Xcode target，例如：</p>
-<blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; target &apos;MyApp&apos; do</div><div class="line">&gt;   pod &apos;AFNetworking&apos;</div><div class="line">&gt; end</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-</li>
-<li><p>这样一个Podfile文件就写好了，保存并执行<code>$ pod install</code>命令。</p>
-</li>
-</ul>
-<ul>
-<li>这时候Xcode根目录会生成一个.xcworkspace的文件，指定的库就集成好了。</li>
-</ul>
-<h2 id="pod-install-amp-pod-update区别"><a href="#pod-install-amp-pod-update区别" class="headerlink" title="pod install &amp; pod update区别"></a>pod install &amp; pod update区别</h2><p>刚接触 CocoaPods 的开发者会经常分不清这两者的区别。</p>
-<ul>
-<li><p>pod install：</p>
-<blockquote>
-<ul>
-<li>在项目安装新的pod中使用，会安装指定的第三方库。</li>
-<li>新添加库，pod install会对曾经添加的库默认使用现有的版本，无需下载，对于新添加的库会下载安装。耗时短。</li>
-</ul>
-</blockquote>
-</li>
-<li><p>pod update：</p>
-<blockquote>
-<ul>
-<li>使用pod update会对所有的库进行版本校验，如果发现更新则下载更新。耗时长。</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<h2 id="管理Pods依赖库版本"><a href="#管理Pods依赖库版本" class="headerlink" title="管理Pods依赖库版本"></a>管理Pods依赖库版本</h2><p>通过下面的方式，可以很轻易的对库的版本进行管理：</p>
-<ul>
-<li>pod ‘AFNetworking’ //不显式指定依赖库版本，表示每次都获取最新版本</li>
-<li>pod ‘AFNetworking’, ‘2.0’ //只使用2.0版本</li>
-<li>pod ‘AFNetworking’, ‘&gt; 2.0’ //使用大于2.0的版本</li>
-<li>pod ‘AFNetworking’, ‘&gt;= 2.0’ //使用大于或等于2.0的版本</li>
-<li>pod ‘AFNetworking’, ‘&lt; 2.0’ //使用小于2.0的版本</li>
-<li>pod ‘AFNetworking’, ‘&lt;= 2.0’ //使用小于或等于2.0的版本</li>
-<li>pod ‘AFNetworking’, ‘~&gt; 0.1.2’ //使用大于等于0.1.2但小于0.2的版本</li>
-<li>pod ‘AFNetworking’, ‘~&gt; 0.1’ //使用大于等于0.1但小于1.0的版本</li>
-<li>pod ‘AFNetworking’, ‘~&gt; 0’ //使用大于0的版本，和什么都不写效果相同</li>
-</ul>
+        <h1 id="Swift-Base"><a href="#Swift-Base" class="headerlink" title="Swift Base"></a>Swift Base</h1><h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let language = &quot;swift&quot;</div><div class="line">let num: Int = 1</div><div class="line">let isTrue = true</div></pre></td></tr></table></figure>
+<h2 id="var"><a href="#var" class="headerlink" title="var"></a>var</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var str = &quot;Hello, playground&quot;</div></pre></td></tr></table></figure>
+<p>对变量进行操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">str = str + str</div><div class="line">str = &quot;\(str)\(str)&quot;</div><div class="line">str = &quot;\(str.characters.count)&quot;</div></pre></td></tr></table></figure>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let names = [&quot;Lily&quot;, &quot;Santiago&quot;, &quot;Justyn&quot;, &quot;Aadya&quot;] //推荐</div><div class="line">let names: [String] = [&quot;Lily&quot;, &quot;Santiago&quot;, &quot;Justyn&quot;, &quot;Aadya&quot;]</div></pre></td></tr></table></figure>
+<h2 id="Modifying-an-Array"><a href="#Modifying-an-Array" class="headerlink" title="Modifying an Array"></a>Modifying an Array</h2><h3 id="add"><a href="#add" class="headerlink" title="add"></a>add</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var array = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</div><div class="line">array.append(&quot;d&quot;) //增加</div></pre></td></tr></table></figure>
+<h3 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">array.remove(at: 1)</div><div class="line">array.removeAll()</div></pre></td></tr></table></figure>
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">array[0] = &quot;e&quot;</div><div class="line">array[2...3] = [&quot;x&quot;, &quot;y&quot;]</div></pre></td></tr></table></figure>
+<h2 id="Dictionary"><a href="#Dictionary" class="headerlink" title="Dictionary"></a>Dictionary</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let ages = [&quot;Mohsen&quot;: 17, &quot;Amy&quot;: 40, &quot;Graham&quot;: 5]</div></pre></td></tr></table></figure>
+<h2 id="Modifying-an-dictionary"><a href="#Modifying-an-dictionary" class="headerlink" title="Modifying an dictionary"></a>Modifying an dictionary</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let b: Int? = ages[&quot;d&quot;]</div><div class="line">if b == nil&#123;</div><div class="line">    print(&quot;It&apos;s nil&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>等价于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//推荐</div><div class="line">if let c = ages[&quot;Amy&quot;] &#123;</div><div class="line">    print(&quot;name is \(c)&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Loops"><a href="#Loops" class="headerlink" title="Loops"></a>Loops</h2><h3 id="While-amp-Repeat-While"><a href="#While-amp-Repeat-While" class="headerlink" title="While &amp; Repeat-While"></a>While &amp; Repeat-While</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">while !endOfFile &#123;</div><div class="line"> readLine()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repeat &#123;</div><div class="line"> performTask()</div><div class="line">&#125; while tasksRemaining &gt; 0</div></pre></td></tr></table></figure>
+<h3 id="For-In"><a href="#For-In" class="headerlink" title="For-In"></a>For-In</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let dogString = &quot;Dog⁈🐶&quot;</div><div class="line">for character in dogString.characters &#123;</div><div class="line">   print(character)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for number in 1...5 &#123;</div><div class="line">   print(&quot;\(number) times 4 is \(number * 4)&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let results = [7, 52, 9, 33, 6, 12, 86, 4, 22, 18, 3]</div><div class="line">let maxResultCount = 5</div><div class="line">for index in 0..&lt;maxResultCount &#123;</div><div class="line">   print(&quot;Result \(index) is \(results[index])&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for name in [&quot;Lily&quot;, &quot;Santiago&quot;, &quot;Justyn&quot;, &quot;Aadya&quot;] &#123;</div><div class="line">   print(&quot;Hello, \(name)!&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let ages = [&quot;Mohsen&quot;: 17, &quot;Amy&quot;: 40, &quot;Graham&quot;: 5]</div><div class="line">for (name, age) in ages &#123;</div><div class="line">   print(&quot;\(name) is \(age) years old&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let age = 32</div><div class="line">if age == 1 &#123;</div><div class="line"> print(&quot;Happy first birthday!&quot;)</div><div class="line">&#125; else if age == 40 &#123;</div><div class="line"> print(&quot;Happy 40th birthday!&quot;)</div><div class="line">&#125; else &#123;</div><div class="line"> print(&quot;no&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">let age = 40</div><div class="line">switch age &#123;</div><div class="line">case 1:</div><div class="line">    print(&quot;Happy first birthday!&quot;)</div><div class="line">case 13...19:</div><div class="line">    print(&quot;Happy birthday, teenager!&quot;)</div><div class="line">case let decade where decade % 10 == 0:</div><div class="line">    print(&quot;Happy significant \(decade)th birthday!&quot;)</div><div class="line">default</div><div class="line">    print(&quot;no&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">let userName = &quot;admian&quot;</div><div class="line">let passwordIsValid = true</div><div class="line">switch (userName, passwordIsValid) &#123;</div><div class="line">case (&quot;admin&quot;, true):</div><div class="line">    print(&quot;Welcome back, administrator!&quot;)</div><div class="line">case (&quot;guest&quot;, _):</div><div class="line">    print(&quot;Guests are not allowed in this restricted area.&quot;)</div><div class="line">case (_, let isValid):</div><div class="line">    print(isValid ? &quot;Welcome to the restricted area!&quot; : &quot;ACCESS DENIED.&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
     
 
@@ -524,8 +487,8 @@
         <div id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://www.visionbao.com/2016/10/31/CocoaPods的各种姿势（基础篇）/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://www.visionbao.com/2016/10/31/CocoaPods的各种姿势（基础篇）/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://www.visionbao.com/2017/06/27/Swift Base/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://www.visionbao.com/2017/06/27/Swift Base/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     queue.offer(function() {
             (function() { // DON'T EDIT BELOW THIS LINE
@@ -556,7 +519,7 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/06/27/Swift Base/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/06/27/Swift Functions/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -570,7 +533,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2016/09/05/CocoaPods 相关/" id="post_nav-older" class="next-content">
+        <a href="/2016/10/31/CocoaPods的各种姿势（基础篇）/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

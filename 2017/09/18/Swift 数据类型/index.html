@@ -10,7 +10,7 @@
     
     <title>
         
-            CocoaPods的各种姿势（基础篇） | 
+            Swift 数据类型 | 
         
         VisionBao&#39;s blog
     </title>
@@ -64,7 +64,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.visionbao.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="CocoaPods的各种姿势（基础篇） | VisionBao&#39;s blog">
+    <meta property="og:title" content="Swift 数据类型 | VisionBao&#39;s blog">
     <meta property="og:description" content="visionbao iOS Cocoapods github xcode develop">
     
 
@@ -272,7 +272,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CocoaPods的各种姿势（基础篇）"><span class="post-toc-number">1.</span> <span class="post-toc-text">CocoaPods的各种姿势（基础篇）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概况"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概况</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装CocoaPods"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">安装CocoaPods</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用CocoaPods的镜像索引"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">使用CocoaPods的镜像索引</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在一个Xcode工程下使用CocoaPods"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">在一个Xcode工程下使用CocoaPods</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#pod-install-amp-pod-update区别"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">pod install & pod update区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#管理Pods依赖库版本"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">管理Pods依赖库版本</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Struct"><span class="post-toc-number">1.</span> <span class="post-toc-text">Struct</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Extensions"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Extensions</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛型结构"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">泛型结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#class"><span class="post-toc-number">2.</span> <span class="post-toc-text">class</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#protocols"><span class="post-toc-number">3.</span> <span class="post-toc-text">protocols</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Enumerations"><span class="post-toc-number">4.</span> <span class="post-toc-text">Enumerations</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他用法"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">其他用法</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -309,7 +309,7 @@
         
     
             <p class="article-headline-p">
-                CocoaPods的各种姿势（基础篇）
+                Swift 数据类型
             </p>
         </div>
 
@@ -328,7 +328,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>VisionBao</strong>
-        <span>10月 31, 2016</span>
+        <span>9月 18, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -349,7 +349,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADj0lEQVR42u3aS26DUAwF0Ox/0+20UhR6bT8nVD2MooQCPgxcfx5fjh/HAwEOHDhw4MCBAwcOHDfmeMTHz/OfPz9fM/n++sqv7l799dX5OHDgwIFjj+OXVBSccx3G86+9sHPQPBYcOHDgwLHHkSTX3l+9CiZJt3l4zVhw4MCBA8dHOXKm6+RaLQh7SRcHDhw4cPwVjkm7sFqM9UBx4MCBA8cdOKplUtLyKzTp4sSZX2G9V4oDBw4cONYWGu7z+Rb7HThw4MDxjzmqx+E1tVYyzhcsoohw4MCBA8dRjmo7L19NqKbzhKCXYg9UtDhw4MCBI+aYD3J6w6TeC6imWBw4cODA8X6OPDUmibM6mqqm/Cpx9MJw4MCBA8dRjt6N58kvXz6Yl384cODAgeP9HHkqzVtvpwZOefuyOcrCgQMHDhxHOXrLcHlDMF+DSK5ZXeOLkjEOHDhw4FjgmKwFVEGTdmShtddasMCBAwcOHHscyRhpUjIVmnQxXK/kK1e0OHDgwIHjUHNwUtRV1xcmqxLV5NocO+HAgQMHjgFHXkT12n+9AVLv9RQGYDhw4MCB4yjHfGwzCTvnS87MB1E4cODAgWOPYyP4U7/mCw2jO+LAgQMHjgWOfBDVI5uMjq4HVPk1CwsNOHDgwIFjwJEPb+aPdTZBVpuA0UIDDhw4cOBY4KiurOXNuHwVb/KE+ZIfDhw4cODY4EjS4UYbMf8mebbqqgQOHDhw4NjjqJZG1+2/3tAoLwurf4sDBw4cON7PMXmU+cDpVFpdWWjAgQMHDhyHOJJH6aHkbcQcd/49Dhw4cOA4y5GPlHpDpiSwpNDKFyPye+HAgQMHjndyVG+2kZirlM3UiwMHDhw41jh6LbleSBs0zeSNAwcOHDiOcuQ0yfdJ6TUfTfU4RgsNOHDgwIFjwDFfVquGnReHOUoCjQMHDhw4Njh6SwxV0HwglISXlJ35vwI4cODAgeMsR/VIEm2y4pAPqCYLdtEz48CBAweOoxyP+JiXW5O1g+SVVHFx4MCBA8ceRz74mT9WtTzrtTKbYyccOHDgwHGUY5JcewVeniDzpJuvSuDAgQMHjjtw5GlvkmKTgPP1iPIUDgcOHDhwfJQjOX8S9vXqQzmt5s1BHDhw4MAx5ug1BxPKJKQErjrQis7HgQMHDhwLHPOFhuuAq3fM4arXiUo4HDhw4MAx4HDgwIEDBw4cOHDgwIHjZsc3JB00zU4A0iUAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAACyUlEQVR42u3aUW4kIQwE0Nz/0rsHiGZSZXdWs/D4ygcNPEaKZZuvP1eOL2xsbGxsbGxsbOyPZH/F4/tXr1b4PufVV+9Xy3eMzoyNjY19NPuHf/0vDrG5oHb9B86MjY2NfQE7CUVJiMrnJHvt52BjY2Nj50FoE+qSS8HGxsbGfjaAtSnHLPHIi1DY2NjY2EmB5v3hEl57lQnp12tp2NjY2B/Pzpumn/P3P+1vY2NjY38wux3vg0ceWp6dGZ0cGxsb+1B2Hhjar/LS/1MthB9+EmxsbOxD2Xmo+I0DJeu0TYWXa2JjY2Nfw3610KxJkLQH8itr52BjY2Pfw561YzcthLzd+wMm3wsbGxv7aPas0JM8gtykOm2Qqxu92NjY2EewZ7C25JSnFkmwTApSUVcEGxsb+wh2W5pPNpsx2sCWt3ixsbGxb2C3TdxNub/dd39ObGxs7HvYbdN3U2DKv2p/BmxsbOzb2G1RqU0S2iO2Rav314qNjY19D3tf0NmEujYs5XOwsbGxb2DPSvzt3/tC0iwtwcbGxr6BPXuI89Tznf3joWGjFxsbG/sg9obaPuVp0498neQnwcbGxj6VnSzX8pIWb34RbdGqiNvY2NjYx7EfK98E6yQrP1ycwsbGxj6UnTdZ2yvIQ+MsLLXfYmNjY5/K3jy1ycv3mybuvrWMjY2NfQO7TQ/yIv4sNG6azQ+/OcXGxsb+r9hJiJqlB/trbRMbbGxsbOx2g+TB5ay5O9sXGxsb+x52Ozbt2LZJ0LYoiqISNjY29kHsTUBq5+yvb5aEYGNjY9/AToJWWzbaJzCzAFlnYNjY2NgHsdvEYHbcduV2YGNjY2Mn7DbItdc342FjY2Nj7wNYu1r+VZ6QDJ/sYGNjYx/BbtOJPM1ojzhrMAwDGDY2NvYR7FWxZpEwzJ74tOkKNjY29tnsewY2NjY2NjY2Njb2x4y/wA1m2SM6x6kAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -375,7 +375,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2016/10/31/CocoaPods的各种姿势（基础篇）/" class="leancloud-views_num" data-flag-title="CocoaPods的各种姿势（基础篇）">
+                <span id="/2017/09/18/Swift 数据类型/" class="leancloud-views_num" data-flag-title="Swift 数据类型">
      &nbsp;浏览量
 </span>
 
@@ -387,7 +387,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=CocoaPods的各种姿势（基础篇）&url=http://www.visionbao.com//2016/10/31/CocoaPods的各种姿势（基础篇）/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Swift 数据类型&url=http://www.visionbao.com//2017/09/18/Swift 数据类型/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -396,7 +396,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=CocoaPods的各种姿势（基础篇）&url=http://www.visionbao.com//2016/10/31/CocoaPods的各种姿势（基础篇）/index.html&via=VisionBao" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Swift 数据类型&url=http://www.visionbao.com//2017/09/18/Swift 数据类型/index.html&via=VisionBao" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -405,7 +405,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.visionbao.com//2016/10/31/CocoaPods的各种姿势（基础篇）/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.visionbao.com//2017/09/18/Swift 数据类型/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -414,7 +414,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.visionbao.com//2016/10/31/CocoaPods的各种姿势（基础篇）/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.visionbao.com//2017/09/18/Swift 数据类型/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -426,7 +426,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=VisionBao&#39;s blog&title=CocoaPods的各种姿势（基础篇）&summary=visionbao iOS Cocoapods github xcode develop&pics=http://www.visionbao.com/img/favicon.png&url=http://www.visionbao.com/2016/10/31/CocoaPods的各种姿势（基础篇）/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=VisionBao&#39;s blog&title=Swift 数据类型&summary=visionbao iOS Cocoapods github xcode develop&pics=http://www.visionbao.com/img/favicon.png&url=http://www.visionbao.com/2017/09/18/Swift 数据类型/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -444,65 +444,20 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="CocoaPods的各种姿势（基础篇）"><a href="#CocoaPods的各种姿势（基础篇）" class="headerlink" title="CocoaPods的各种姿势（基础篇）"></a>CocoaPods的各种姿势（基础篇）</h1><h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><p>​    CocoaPods是一个十分强大的iOS依赖管理工具，为我们提供便捷的管理第三方库的方式。在项目实际开发过程中，免不了使用各种第三方的开源类库、集成第三方的SDK，如AFNetWorking、FMDB等等，我们可以把这些公共组件交给它去管理。</p>
-<p>​    如果你之前有了解java的Maven或者nodejs的npm，那么你能更轻易的了解CocoaPods这个工具。</p>
-<h2 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods"></a>安装CocoaPods</h2><p>在 OS X 下安装CocoaPods十分简单，只需要打开terminal输入如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo gem install cocoapods</div><div class="line">$ pod setup</div></pre></td></tr></table></figure>
-<p>CocoaPods在<a href="https://rubygems.org/托管，所以在国内下载很慢，我们需要替换我们能访问到的源，如果你已经是墙外用户可以忽略下面步骤：" target="_blank" rel="external">https://rubygems.org/托管，所以在国内下载很慢，我们需要替换我们能访问到的源，如果你已经是墙外用户可以忽略下面步骤：</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/</div></pre></td></tr></table></figure>
-<h3 id="使用CocoaPods的镜像索引"><a href="#使用CocoaPods的镜像索引" class="headerlink" title="使用CocoaPods的镜像索引"></a>使用CocoaPods的镜像索引</h3><p>​    如果pod setup会等比较久，如果太长时间没有反应，可以尝试使用CocoaPods的镜像索引来提高下载速度。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ pod repo remove master</div><div class="line">$ pod repo add master https://gitcafe.com/akuandev/Specs.git</div><div class="line">$ pod repo update</div></pre></td></tr></table></figure>
-<h2 id="在一个Xcode工程下使用CocoaPods"><a href="#在一个Xcode工程下使用CocoaPods" class="headerlink" title="在一个Xcode工程下使用CocoaPods"></a>在一个Xcode工程下使用CocoaPods</h2><ul>
-<li><p>打开Terminal，<code>$ cd</code> 到 Xcode 工程根目录。</p>
-</li>
-<li><p>使用<code>$ pod init</code>命令创建Podfile文件。</p>
-</li>
-<li><p>打开Podfile，首先指定支持的平台和版本，例如：</p>
-<blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; platform :ios, &apos;9.0&apos;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-</li>
-<li><p>新的版本中需要指定 Xcode target，例如：</p>
-<blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; target &apos;MyApp&apos; do</div><div class="line">&gt;   pod &apos;AFNetworking&apos;</div><div class="line">&gt; end</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-</li>
-<li><p>这样一个Podfile文件就写好了，保存并执行<code>$ pod install</code>命令。</p>
-</li>
-</ul>
-<ul>
-<li>这时候Xcode根目录会生成一个.xcworkspace的文件，指定的库就集成好了。</li>
-</ul>
-<h2 id="pod-install-amp-pod-update区别"><a href="#pod-install-amp-pod-update区别" class="headerlink" title="pod install &amp; pod update区别"></a>pod install &amp; pod update区别</h2><p>刚接触 CocoaPods 的开发者会经常分不清这两者的区别。</p>
-<ul>
-<li><p>pod install：</p>
-<blockquote>
-<ul>
-<li>在项目安装新的pod中使用，会安装指定的第三方库。</li>
-<li>新添加库，pod install会对曾经添加的库默认使用现有的版本，无需下载，对于新添加的库会下载安装。耗时短。</li>
-</ul>
-</blockquote>
-</li>
-<li><p>pod update：</p>
-<blockquote>
-<ul>
-<li>使用pod update会对所有的库进行版本校验，如果发现更新则下载更新。耗时长。</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<h2 id="管理Pods依赖库版本"><a href="#管理Pods依赖库版本" class="headerlink" title="管理Pods依赖库版本"></a>管理Pods依赖库版本</h2><p>通过下面的方式，可以很轻易的对库的版本进行管理：</p>
-<ul>
-<li>pod ‘AFNetworking’ //不显式指定依赖库版本，表示每次都获取最新版本</li>
-<li>pod ‘AFNetworking’, ‘2.0’ //只使用2.0版本</li>
-<li>pod ‘AFNetworking’, ‘&gt; 2.0’ //使用大于2.0的版本</li>
-<li>pod ‘AFNetworking’, ‘&gt;= 2.0’ //使用大于或等于2.0的版本</li>
-<li>pod ‘AFNetworking’, ‘&lt; 2.0’ //使用小于2.0的版本</li>
-<li>pod ‘AFNetworking’, ‘&lt;= 2.0’ //使用小于或等于2.0的版本</li>
-<li>pod ‘AFNetworking’, ‘~&gt; 0.1.2’ //使用大于等于0.1.2但小于0.2的版本</li>
-<li>pod ‘AFNetworking’, ‘~&gt; 0.1’ //使用大于等于0.1但小于1.0的版本</li>
-<li>pod ‘AFNetworking’, ‘~&gt; 0’ //使用大于0的版本，和什么都不写效果相同</li>
-</ul>
+        <h1 id="Struct"><a href="#Struct" class="headerlink" title="Struct"></a>Struct</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">struct Rectangle &#123;</div><div class="line">    //属性</div><div class="line">    var width : Int</div><div class="line">    var height : Int</div><div class="line">&#125;</div><div class="line">var rectangle = Rectangle()</div><div class="line">rectangle.height = 4</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">struct Rectangle &#123;</div><div class="line">    //属性</div><div class="line">    var width : Int</div><div class="line">    var height : Int</div><div class="line">    var other : 12</div><div class="line">    //初始化方法</div><div class="line">    init(width: Int, height: Int) &#123;</div><div class="line">        self.width = width</div><div class="line">        self.height = height</div><div class="line">    &#125;</div><div class="line">    //函数</div><div class="line">    func fitsInside(_ other: Rectangle) -&gt; Bool &#123;</div><div class="line">        return (width &lt; other.width) &amp;&amp; (height &lt; other.height)</div><div class="line">    &#125;</div><div class="line">    //自动计算值</div><div class="line">    var area: Int &#123;</div><div class="line">        return width * height</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions"></a>Extensions</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">struct Rectangle &#123;</div><div class="line">    var width : Int</div><div class="line">    var height : Int</div><div class="line">    init(width: Int, height: Int) &#123;</div><div class="line">        self.width = width</div><div class="line">        self.height = height</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">extension Rectangle &#123;</div><div class="line">    func fitsInside(_ other: Rectangle) -&gt; Bool &#123;</div><div class="line">        return (width &lt; other.width) &amp;&amp; (height &lt; other.height)</div><div class="line">    &#125;</div><div class="line">    var area: Int &#123;</div><div class="line">        return width * height</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="泛型结构"><a href="#泛型结构" class="headerlink" title="泛型结构"></a>泛型结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">struct NamedArray&lt;Element&gt; &#123;</div><div class="line">    var name: String</div><div class="line">    var items: [Element]</div><div class="line">&#125;</div><div class="line">//写法1</div><div class="line">let boardGame :NamedArray&lt;String&gt; = NamedArray(name: &quot;Board Games&quot;, items:[&quot;Chess&quot;, &quot;Go&quot;])</div><div class="line"></div><div class="line">let primes: NamedArray&lt;Int&gt; = NamedArray(name: &quot;Primes&quot;, items: [1,3,5,7,13])</div><div class="line">//写法2 (推荐)</div><div class="line">let boardGame = NamedArray(name: &quot;Board Games&quot;, items:[&quot;Chess&quot;, &quot;Go&quot;])</div><div class="line"></div><div class="line">let primes = NamedArray(name: &quot;Primes&quot;, items: [1,3,5,7,13])</div></pre></td></tr></table></figure>
+<h1 id="class"><a href="#class" class="headerlink" title="class"></a>class</h1> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"> class Fish &#123;</div><div class="line">    //属性</div><div class="line">    var name: String</div><div class="line">    //初始化</div><div class="line">    init(name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">    &#125;</div><div class="line">    //方法</div><div class="line">    func swim() &#123;</div><div class="line">        print(&quot;I&apos;m swimming.&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//继承</div><div class="line">class FlyingFish: Fish &#123;</div><div class="line">    func fly() &#123;</div><div class="line">        print(&quot;fly&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class ComplainingFish: Fish &#123;</div><div class="line">    var complaint: String</div><div class="line">    //重写初始化方法</div><div class="line">    init(name: String, complaint: String) &#123;</div><div class="line">        self.complaint = complaint</div><div class="line">        super.init(name: name)</div><div class="line">    &#125;</div><div class="line">    重写父类方法</div><div class="line">    override func swim() &#123;</div><div class="line">        print(&quot;123&quot;)</div><div class="line">        super.swim()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="protocols"><a href="#protocols" class="headerlink" title="protocols"></a>protocols</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">protocol Player &#123;</div><div class="line"></div><div class="line">    func takeTurn(on board: Board)</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct HumanPlayer: Player &#123;</div><div class="line">    func takeTurn(on board: Board) &#123;</div><div class="line">   </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">struct ComputerPlayer: Player &#123;</div><div class="line">    var name: String</div><div class="line">    var score: Int</div><div class="line">    func takeTurn(on board: Board) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let player1 = ComputerPlayer.init(name: &quot;fuck&quot;, score: 1)</div><div class="line">print(player1)</div><div class="line">//使用 extension 关键字会打印相关信息</div><div class="line">extension ComputerPlayer: CustomStringConvertible &#123;</div><div class="line">    var description: String &#123;</div><div class="line">        return &quot;human player \(name) has a score of \(score)&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Enumerations"><a href="#Enumerations" class="headerlink" title="Enumerations"></a>Enumerations</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">enum Alignment &#123;</div><div class="line">    case left</div><div class="line">    case right</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>等同于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">enum Alignment &#123;</div><div class="line">    case left, right</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let textAlignment = Alignment.left</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">switch textAlignment &#123;</div><div class="line">case Alignment.left:</div><div class="line">    print(&quot;1&quot;)</div><div class="line">case Alignment.right:</div><div class="line">    print(&quot;2&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>等同于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">switch textAlignment &#123;</div><div class="line">case .left:</div><div class="line">    print(&quot;12&quot;)</div><div class="line">case .right:</div><div class="line">    print(&quot;1&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="其他用法"><a href="#其他用法" class="headerlink" title="其他用法"></a>其他用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">enum Alignment &#123;</div><div class="line">    case left(padding: Double), right(padding: Double), center</div><div class="line">&#125;</div><div class="line">let textAlignment = Alignment.left(padding: 42.7)</div><div class="line"></div><div class="line">switch textAlignment &#123;</div><div class="line">case .left(let padding):</div><div class="line">    print(&quot;Left with \(padding) pixels of padding&quot;)</div><div class="line">case .right(let padding):</div><div class="line">    print(&quot;Left with \(padding) pixels of padding&quot;)</div><div class="line">case .center:</div><div class="line">    print(&quot;center&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">enum ServerAddress: String &#123;</div><div class="line">    case google = &quot;https://www.google.com&quot;</div><div class="line">    case apple = &quot;https://www.apple.com&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">func findAddress(matchingQuery: String, from server: ServerAddress) &#123;</div><div class="line">    let serviceAddress = server.rawValue</div><div class="line">    print(serviceAddress)</div><div class="line">    </div><div class="line">&#125;</div><div class="line">findAddress(matchingQuery: &quot;11&quot;, from: .google)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">enum SomeError: ErrorProtocol &#123;</div><div class="line">    case somethingWentWrong, somethingFailed</div><div class="line">&#125;</div><div class="line">func doSomething() throws -&gt; Data &#123;</div><div class="line">    progressBar.visible = true</div><div class="line">    defer &#123; progressBar.visible = false &#125;</div><div class="line">    let data: Data?</div><div class="line">    do &#123;</div><div class="line">        data = try somethingThatMightFail()</div><div class="line">    &#125; catch SomeError.somethingWentWrong &#123;</div><div class="line">        data = nil</div><div class="line">    &#125;</div><div class="line">    guard let result = summarize(data) else &#123; throw SomeError.somethingFailed &#125;</div><div class="line">    return result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
     
 
@@ -524,8 +479,8 @@
         <div id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://www.visionbao.com/2016/10/31/CocoaPods的各种姿势（基础篇）/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://www.visionbao.com/2016/10/31/CocoaPods的各种姿势（基础篇）/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://www.visionbao.com/2017/09/18/Swift 数据类型/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://www.visionbao.com/2017/09/18/Swift 数据类型/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     queue.offer(function() {
             (function() { // DON'T EDIT BELOW THIS LINE
@@ -556,21 +511,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/06/27/Swift Base/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2016/09/05/CocoaPods 相关/" id="post_nav-older" class="next-content">
+        <a href="/2017/08/16/Swift API Design Guidelines/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
