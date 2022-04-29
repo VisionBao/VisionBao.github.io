@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>1.alloc 方法探索 | OrcaHub</title><meta name="author" content="VisionBao"><meta name="copyright" content="VisionBao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.alloc 方法探索准备工作 objc4-838.1 源码 新建一个工程，并创建一个 Class，名称是 VBPlanet，代码如下  VBPlanet.h 123456@interface VBPlanet : NSObject@property (nonatomic ,assign) int distance;@property (nonatomic ,copy) NSString *na">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.alloc 方法探索">
+<meta property="og:url" content="http://blog.visionbao.com/f10382a6593f/index.html">
+<meta property="og:site_name" content="OrcaHub">
+<meta property="og:description" content="1.alloc 方法探索准备工作 objc4-838.1 源码 新建一个工程，并创建一个 Class，名称是 VBPlanet，代码如下  VBPlanet.h 123456@interface VBPlanet : NSObject@property (nonatomic ,assign) int distance;@property (nonatomic ,copy) NSString *na">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-04-28T07:43:02.000Z">
+<meta property="article:modified_time" content="2022-04-28T08:18:09.836Z">
+<meta property="article:author" content="VisionBao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.visionbao.com/f10382a6593f/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '1.alloc 方法探索',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-28 16:18:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">OrcaHub</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">1.alloc 方法探索</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-28T07:43:02.000Z" title="发表于 2022-04-28 15:43:02">2022-04-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-28T08:18:09.836Z" title="更新于 2022-04-28 16:18:09">2022-04-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="1.alloc 方法探索"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1-alloc-方法探索"><a href="#1-alloc-方法探索" class="headerlink" title="1.alloc 方法探索"></a>1.alloc 方法探索</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>objc4-838.1 源码</li>
+<li>新建一个工程，并创建一个 Class，名称是 VBPlanet，代码如下</li>
+</ol>
+<p>VBPlanet.h</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@interface VBPlanet : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic ,assign) int distance;</span><br><span class="line">@property (nonatomic ,copy) NSString *name;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<p>VBPlanet.m</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@implementation VBPlanet</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<p>在 ViewController.m 中引入 VBPlanet 文件，并添加如下代码，并在该行添加断点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VBPlanet *p = [VBPlanet alloc];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img-cdn.visionbao.com/mweb/16510432411667.jpg?imageView2/0/interlace/1/q/100%7Cwatermark/2/text/YmxvZy5WaXNpb25CYW8uY29t/font/5a6L5L2T/fontsize/240/fill/IzA4MDgwOA==/dissolve/50/gravity/SouthEast/dx/10/dy/10"></p>
+<h2 id="探究过程"><a href="#探究过程" class="headerlink" title="探究过程"></a>探究过程</h2><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>这里有两种方式，可以让我们了解函数的调用过程：</p>
+<ul>
+<li>常规方法，通过单步调试（Step into) 来查看方法的调用过程。这种适用于有源码的情况。</li>
+<li>通过查看汇编代码了解调用过程。适用于没有源码的情况。</li>
+</ul>
+<p>这里着重介绍一下第二种方式：</p>
+<ol>
+<li>运行代码，将代码的断点设置到上图的位置；</li>
+<li>从菜单栏中点击 <code>Debug -&gt; Debug Workflow -&gt; Always Show Disassembly</code>;</li>
+<li>通过汇编代码的注释，结合单步调试，也可以了解到方法的调用过程。</li>
+</ol>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>通过上面两种方式，可以得出如下调用过程：<br><code>alloc-&gt; objc_alloc —&gt; callAlloc —&gt; objc_msgSend —&gt; alloc —&gt; _objc_rootAlloc —&gt; callAlloc —&gt;_objc_rootAllocWithZone —&gt; _class_createInstanceFromZone</code></p>
+<h2 id="函数分析"><a href="#函数分析" class="headerlink" title="函数分析"></a>函数分析</h2><p>再来看一下函数实现：</p>
+<h3 id="objc-alloc"><a href="#objc-alloc" class="headerlink" title="objc_alloc"></a>objc_alloc</h3><p>首先调用 objc_alloc 方法，同时 objc_alloc 会调用 callAlloc 方法中，注意此时第二第三参数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Calls [cls alloc].</span></span><br><span class="line">id</span><br><span class="line"><span class="title function_">objc_alloc</span><span class="params">(Class cls)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> callAlloc(cls, <span class="literal">true</span><span class="comment">/*checkNil*/</span>, <span class="literal">false</span><span class="comment">/*allocWithZone*/</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="callAlloc"><a href="#callAlloc" class="headerlink" title="callAlloc"></a>callAlloc</h3><p>我们注意到流程中出现两个 callAlloc 方法这里详细展开一下</p>
+<ol>
+<li>第一次调用 callAlloc 方法最终会 return 到最后一行<code>return ((id(*)(id, SEL))objc_msgSend)(cls, @selector(alloc));</code>中</li>
+<li>第二次调用 callAlloc 方法最终会 return 到<code>_objc_rootAllocWithZone</code>中</li>
+</ol>
+<p>具体可以看一下注释：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Call [cls alloc] or [cls allocWithZone:nil], with appropriate</span></span><br><span class="line"><span class="comment">// shortcutting optimizations.</span></span><br><span class="line"><span class="type">static</span> ALWAYS_INLINE id</span><br><span class="line"><span class="title function_">callAlloc</span><span class="params">(Class cls, <span class="type">bool</span> checkNil, <span class="type">bool</span> allocWithZone=<span class="literal">false</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// 这个预编译一定会进判断是不是objc2版本</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> __OBJC2__</span></span><br><span class="line">    <span class="comment">// 检查cls这个类是否存在，如果不存在就返回nil;</span></span><br><span class="line">    <span class="keyword">if</span> (slowpath(checkNil &amp;&amp; !cls)) <span class="keyword">return</span> nil;</span><br><span class="line">    <span class="comment">// 检查cls这个类是否初始化，是否重写了allocwithzone方法。当没有初始化且没有重写allocwithzone方法会return;</span></span><br><span class="line">    <span class="keyword">if</span> (fastpath(!cls-&gt;ISA()-&gt;hasCustomAWZ())) &#123;</span><br><span class="line">        <span class="keyword">return</span> _objc_rootAllocWithZone(cls, nil);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// No shortcuts available.</span></span><br><span class="line">    <span class="comment">// 根据传入参数allocWithZone，判断是否需要调用cls的allocWithZone方法;</span></span><br><span class="line">    <span class="keyword">if</span> (allocWithZone) &#123;</span><br><span class="line">        <span class="keyword">return</span> ((id(*)(id, SEL, <span class="keyword">struct</span> _NSZone *))objc_msgSend)(cls, @selector(allocWithZone:), nil);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 通过objc_msgSend调用alloc方法</span></span><br><span class="line">    <span class="keyword">return</span> ((id(*)(id, SEL))objc_msgSend)(cls, @selector(alloc));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="alloc"><a href="#alloc" class="headerlink" title="alloc"></a>alloc</h3><p>第一次调用 callAlloc 后会调用 alloc 方法，alloc 方法进一步执行_objc_rootAlloc</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (id)alloc &#123;</span><br><span class="line">    <span class="keyword">return</span> _objc_rootAlloc(self);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="objc-rootAlloc"><a href="#objc-rootAlloc" class="headerlink" title="_objc_rootAlloc"></a>_objc_rootAlloc</h3><p>该方法会再一次调用 callAlloc 方法，注意此时的第三个参数为 true(allocWithZone)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Base class implementation of +alloc. cls is not nil.</span></span><br><span class="line"><span class="comment">// Calls [cls allocWithZone:nil].</span></span><br><span class="line">id</span><br><span class="line">_objc_rootAlloc(Class cls)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> callAlloc(cls, <span class="literal">false</span><span class="comment">/*checkNil*/</span>, <span class="literal">true</span><span class="comment">/*allocWithZone*/</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="objc-rootAllocWithZone"><a href="#objc-rootAllocWithZone" class="headerlink" title="_objc_rootAllocWithZone"></a>_objc_rootAllocWithZone</h3><p>直接调用_class_createInstanceFromZone 方法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NEVER_INLINE</span><br><span class="line">id</span><br><span class="line">_objc_rootAllocWithZone(Class cls, <span class="type">malloc_zone_t</span> *zone __unused)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// allocWithZone under __OBJC2__ ignores the zone parameter</span></span><br><span class="line">    <span class="keyword">return</span> _class_createInstanceFromZone(cls, <span class="number">0</span>, nil,</span><br><span class="line">                                         OBJECT_CONSTRUCT_CALL_BADALLOC);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="class-createInstanceFromZone"><a href="#class-createInstanceFromZone" class="headerlink" title="_class_createInstanceFromZone"></a>_class_createInstanceFromZone</h3><p>这里面主要进行三个步骤</p>
+<ol>
+<li>计算需要的大小</li>
+<li>根据大小开辟内存空间</li>
+<li>进行 isa 指针绑定</li>
+</ol>
+<p>其他的是一些异常边界处理和 C++扩展的处理</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***********************************************************************</span></span><br><span class="line"><span class="comment">* class_createInstance</span></span><br><span class="line"><span class="comment">* fixme</span></span><br><span class="line"><span class="comment">* Locking: none</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* Note: this function has been carefully written so that the fastpath</span></span><br><span class="line"><span class="comment">* takes no branch.</span></span><br><span class="line"><span class="comment">**********************************************************************/</span></span><br><span class="line"><span class="type">static</span> ALWAYS_INLINE id</span><br><span class="line">_class_createInstanceFromZone(Class cls, <span class="type">size_t</span> extraBytes, <span class="type">void</span> *zone,</span><br><span class="line">                              <span class="type">int</span> construct_flags = OBJECT_CONSTRUCT_NONE,</span><br><span class="line">                              <span class="type">bool</span> cxxConstruct = <span class="literal">true</span>,</span><br><span class="line">                              <span class="type">size_t</span> *outAllocatedSize = nil)</span><br><span class="line">&#123;</span><br><span class="line">    ASSERT(cls-&gt;isRealized());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read class&#x27;s info bits all at once for performance</span></span><br><span class="line">    <span class="type">bool</span> hasCxxCtor = cxxConstruct &amp;&amp; cls-&gt;hasCxxCtor();</span><br><span class="line">    <span class="type">bool</span> hasCxxDtor = cls-&gt;hasCxxDtor();</span><br><span class="line">    <span class="type">bool</span> fast = cls-&gt;canAllocNonpointer();</span><br><span class="line">    <span class="type">size_t</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算需要的大小</span></span><br><span class="line">    size = cls-&gt;instanceSize(extraBytes);</span><br><span class="line">    <span class="keyword">if</span> (outAllocatedSize) *outAllocatedSize = size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开辟内存空间</span></span><br><span class="line">    id obj;</span><br><span class="line">    <span class="keyword">if</span> (zone) &#123;</span><br><span class="line">        obj = (id)malloc_zone_calloc((<span class="type">malloc_zone_t</span> *)zone, <span class="number">1</span>, size);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        obj = (id)<span class="built_in">calloc</span>(<span class="number">1</span>, size);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (slowpath(!obj)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (construct_flags &amp; OBJECT_CONSTRUCT_CALL_BADALLOC) &#123;</span><br><span class="line">            <span class="keyword">return</span> _objc_callBadAllocHandler(cls);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nil;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// isa指针绑定</span></span><br><span class="line">    <span class="keyword">if</span> (!zone &amp;&amp; fast) &#123;</span><br><span class="line">        obj-&gt;initInstanceIsa(cls, hasCxxDtor);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Use raw pointer isa on the assumption that they might be</span></span><br><span class="line">        <span class="comment">// doing something weird with the zone or RR.</span></span><br><span class="line">        obj-&gt;initIsa(cls);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fastpath(!hasCxxCtor)) &#123;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    construct_flags |= OBJECT_CONSTRUCT_FREE_ONFAILURE;</span><br><span class="line">    <span class="keyword">return</span> object_cxxConstructFromClass(obj, cls, construct_flags);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="汇编指令"><a href="#汇编指令" class="headerlink" title="汇编指令"></a>汇编指令</h3><p>b bl 跳转指令 可以理解为函数调用<br>ret 函数返回<br>;注释<br>举例：<br><img src="http://img-cdn.visionbao.com/mweb/16511112922142.jpg?imageView2/0/interlace/1/q/100%7Cwatermark/2/text/YmxvZy5WaXNpb25CYW8uY29t/font/5a6L5L2T/fontsize/240/fill/IzA4MDgwOA==/dissolve/50/gravity/SouthEast/dx/10/dy/10"></p>
+<h3 id="CPU-组成"><a href="#CPU-组成" class="headerlink" title="CPU 组成"></a>CPU 组成</h3><p>CPU 内部主要由运算器、控制器、寄存器三大部分组成。</p>
+<ul>
+<li>运算器 负责算术运算（+ - * &#x2F; 基本运算和附加运算）和逻辑运算（包括 移位、逻辑测试或比较两个值等）。</li>
+<li>控制器 负责应对所有的信息情况，调度运算器把计算做好。</li>
+<li>寄存器 它们可用来暂存指令、数据和地址。既要对接控制器的命令，传达命令给运算器；还要帮运算器记录处理完或者将要处理的数据。</li>
+</ul>
+<h3 id="符号断点"><a href="#符号断点" class="headerlink" title="符号断点"></a>符号断点</h3><p><img src="http://img-cdn.visionbao.com/mweb/16511112529043.jpg?imageView2/0/interlace/1/q/100%7Cwatermark/2/text/YmxvZy5WaXNpb25CYW8uY29t/font/5a6L5L2T/fontsize/240/fill/IzA4MDgwOA==/dissolve/50/gravity/SouthEast/dx/10/dy/10"><br><img src="http://img-cdn.visionbao.com/mweb/16511112743254.jpg?imageView2/0/interlace/1/q/100%7Cwatermark/2/text/YmxvZy5WaXNpb25CYW8uY29t/font/5a6L5L2T/fontsize/240/fill/IzA4MDgwOA==/dissolve/50/gravity/SouthEast/dx/10/dy/10"><br><img src="http://img-cdn.visionbao.com/mweb/16511112922142.jpg?imageView2/0/interlace/1/q/100%7Cwatermark/2/text/YmxvZy5WaXNpb25CYW8uY29t/font/5a6L5L2T/fontsize/240/fill/IzA4MDgwOA==/dissolve/50/gravity/SouthEast/dx/10/dy/10"></p>
+<h3 id="寄存器读取"><a href="#寄存器读取" class="headerlink" title="寄存器读取"></a>寄存器读取</h3><p>使用命令<code>register read</code>&amp; <code>register read x0</code>读取寄存器内容<br>X0-x7 寄存器 用于将参数传递给函数并返回<br>x0 一般是返回</p>
+<p>举例：<br>使用<code>register read</code>结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">(lldb) register read</span><br><span class="line">General Purpose Registers:</span><br><span class="line">        x0 = 0x0000000104b2d468  (void *)0x0000000104b2d440: VBPlanet</span><br><span class="line">        x1 = 0x00000001cbde08b0</span><br><span class="line">        x2 = 0x0000000000000001</span><br><span class="line">        x3 = 0x000000016b2d8070</span><br><span class="line">        x4 = 0x0000000000000010</span><br><span class="line">        x5 = 0x0000000000000058</span><br><span class="line">        x6 = 0x00737261625f7373</span><br><span class="line">        x7 = 0x0000000000000b10</span><br><span class="line">        x8 = 0x00000001051c4000  &quot;instanceMethodSignatureForSelector:&quot;</span><br><span class="line">        x9 = 0xdf91c20454a800c0</span><br><span class="line">       x10 = 0x0000000000000001</span><br><span class="line">       x11 = 0x0000600000599308</span><br><span class="line">       x12 = 0x0000000000000000</span><br><span class="line">       x13 = 0x0000000000000000</span><br><span class="line">       x14 = 0x0000000180000000</span><br><span class="line">       x15 = 0x0000000110ffd3d5  UIKitCore`_OBJC_$_INSTANCE_METHODS_UIViewController(UIAlertControllerContentViewController|UIResponderChainTraversal|UIActionSheetPresentationControllerAccess|UIImagePickerControllerAdditions|PLImagePickerViewControllerInterface|ForHomeOnly|UIPopoverController_Internal|_UIMultiColumnViewController|_UIKitIsUIViewController|UIPerformsActions|UITabBarControllerItem|UISplitViewController|BinaryCompatibility|UINavigationControllerItemInternal|UINavigationControllerItem|UINavigationControllerContextualToolbar|UINavigationControllerContextToolbar_Internal|UIContainerViewControllerProtectedMethods|UIContainerViewControllerCallbacks|UIContainerViewControllerCallbacks_Internal|StateRestoration_Internal|StateRestoration|ActivityContinuationPrivate|ActivityContinuationInternal|ActivityContinuation|EmbeddedViewSupport|UIFirstResponderSupport|UICollectionViewControllerSupport|UIViewControllerTransitioning|AdaptiveSizing|AdaptiveSizing_Internal|UIViewControllerClassDumpWarning|UIKeyCommand|ForUISplitViewController|AccessibilityHUD|HangTracer|UIKitManual|NSExtensionAdditionsInternal|NSExtensionAdditions|_UIApplicationRotationFollowing|_UIFallbackEnvironment|UnwindSegueSupport|_UISheetPresentationController|ViewServices|ViewService_Internal|ViewService_StateRestoration) + 3501</span><br><span class="line">       x16 = 0x00000001051ad174  libobjc.A.dylib`objc_alloc</span><br><span class="line">       x17 = 0x0000000104f85934  libMainThreadChecker.dylib`__trampolines + 18856</span><br><span class="line">       x18 = 0x0000000000000000</span><br><span class="line">       x19 = 0x00000001595088a0</span><br><span class="line">       x20 = 0x0000000000000000</span><br><span class="line">       x21 = 0x0000000111888000</span><br><span class="line">       x22 = 0x00000001cbde0aaf</span><br><span class="line">       x23 = 0x00000001cbf8e775</span><br><span class="line">       x24 = 0x0000000000000000</span><br><span class="line">       x25 = 0x0000000111813000  UIKitCore`UIPreviewInteraction._interactionImpl</span><br><span class="line">       x26 = 0x0000000159506140</span><br><span class="line">       x27 = 0x00000001cbdf2bcb</span><br><span class="line">       x28 = 0x000000010561d910  CoreFoundation`__NSArray0__struct</span><br><span class="line">        fp = 0x000000016b2d7ee0</span><br><span class="line">        lr = 0x0000000104b25d88  test`-[ViewController viewDidLoad] + 68 at ViewController.m:27:19</span><br><span class="line">        sp = 0x000000016b2d7ea0</span><br><span class="line">        pc = 0x00000001051ad198  libobjc.A.dylib`objc_alloc + 36</span><br><span class="line">      cpsr = 0x60001000</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>register read x0</code>结果如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(lldb) register read x0</span><br><span class="line">      x0 = 0x0000000104b2d468  (void *)0x0000000104b2d440: VBPlanet</span><br><span class="line">(lldb) register read x1</span><br><span class="line">      x1 = 0x00000001cbde08b0</span><br><span class="line">(lldb) po (char *)0x00000001cbde08b0</span><br><span class="line">&quot;alloc&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h3><ul>
+<li>[1] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/gnivor/p/15679241.html">CPU 基础知识-CPU 的组成 运算器、控制器、寄存器 </a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">VisionBao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.visionbao.com/f10382a6593f/">http://blog.visionbao.com/f10382a6593f/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.visionbao.com" target="_blank">OrcaHub</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/4c5c70e30c3c/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">2.init方法探究</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-alloc-%E6%96%B9%E6%B3%95%E6%8E%A2%E7%B4%A2"><span class="toc-number">1.</span> <span class="toc-text">1.alloc 方法探索</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A2%E7%A9%B6%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">探究过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.1.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">1.2.2.</span> <span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">函数分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#objc-alloc"><span class="toc-number">1.3.1.</span> <span class="toc-text">objc_alloc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#callAlloc"><span class="toc-number">1.3.2.</span> <span class="toc-text">callAlloc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#alloc"><span class="toc-number">1.3.3.</span> <span class="toc-text">alloc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#objc-rootAlloc"><span class="toc-number">1.3.4.</span> <span class="toc-text">_objc_rootAlloc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#objc-rootAllocWithZone"><span class="toc-number">1.3.5.</span> <span class="toc-text">_objc_rootAllocWithZone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class-createInstanceFromZone"><span class="toc-number">1.3.6.</span> <span class="toc-text">_class_createInstanceFromZone</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%93%E5%B1%95"><span class="toc-number">1.4.</span> <span class="toc-text">拓展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4"><span class="toc-number">1.4.1.</span> <span class="toc-text">汇编指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-%E7%BB%84%E6%88%90"><span class="toc-number">1.4.2.</span> <span class="toc-text">CPU 组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E6%96%AD%E7%82%B9"><span class="toc-number">1.4.3.</span> <span class="toc-text">符号断点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E8%AF%BB%E5%8F%96"><span class="toc-number">1.4.4.</span> <span class="toc-text">寄存器读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-number">1.4.5.</span> <span class="toc-text">拓展阅读</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2022 By VisionBao</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
