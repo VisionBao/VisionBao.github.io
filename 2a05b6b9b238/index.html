@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>10.isa指向分析&amp;类与元类的关系 | OrcaHub</title><meta name="author" content="VisionBao"><meta name="copyright" content="VisionBao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="10.isa指向分析&amp;类与元类的关系准备工作 创建一个Xcode工程 创建VBPlanet类继承于NSObject 创建VBMars类继承于VBPlanet  isa指向分析获取类的三种方式123Class class1 &#x3D; [VBPlanet class];Class class2 &#x3D; [VBPlanet alloc].class;Class class3 &#x3D; object_getCla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10.isa指向分析&amp;类与元类的关系">
+<meta property="og:url" content="http://blog.visionbao.com/2a05b6b9b238/index.html">
+<meta property="og:site_name" content="OrcaHub">
+<meta property="og:description" content="10.isa指向分析&amp;类与元类的关系准备工作 创建一个Xcode工程 创建VBPlanet类继承于NSObject 创建VBMars类继承于VBPlanet  isa指向分析获取类的三种方式123Class class1 &#x3D; [VBPlanet class];Class class2 &#x3D; [VBPlanet alloc].class;Class class3 &#x3D; object_getCla">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-05-17T07:25:57.000Z">
+<meta property="article:modified_time" content="2022-05-17T07:26:42.165Z">
+<meta property="article:author" content="VisionBao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.visionbao.com/2a05b6b9b238/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?29ccd4c82ece6d4d2a8e118f6db013d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-TVJ53PFKBN"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-TVJ53PFKBN');
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"I5T3J7E3D8","apiKey":"e65ec5c72ed22fe84936ce932ca7aecd","indexName":"OrcaHub","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '10.isa指向分析&类与元类的关系',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-17 15:26:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">OrcaHub</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">10.isa指向分析&amp;类与元类的关系</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-17T07:25:57.000Z" title="发表于 2022-05-17 15:25:57">2022-05-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-17T07:26:42.165Z" title="更新于 2022-05-17 15:26:42">2022-05-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="10.isa指向分析&amp;类与元类的关系"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="10-isa指向分析-amp-类与元类的关系"><a href="#10-isa指向分析-amp-类与元类的关系" class="headerlink" title="10.isa指向分析&amp;类与元类的关系"></a>10.isa指向分析&amp;类与元类的关系</h1><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>创建一个Xcode工程</li>
+<li>创建VBPlanet类继承于NSObject</li>
+<li>创建VBMars类继承于VBPlanet</li>
+</ol>
+<h2 id="isa指向分析"><a href="#isa指向分析" class="headerlink" title="isa指向分析"></a>isa指向分析</h2><h3 id="获取类的三种方式"><a href="#获取类的三种方式" class="headerlink" title="获取类的三种方式"></a>获取类的三种方式</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class class1 = [VBPlanet class];</span><br><span class="line">Class class2 = [VBPlanet alloc].class;</span><br><span class="line">Class class3 = object_getClass([VBPlanet alloc]);</span><br></pre></td></tr></table></figure>
+<p>NSLog(@”\n%p-\n%p-\n%p”,class1,class2,class3);</p>
+<h3 id="探究"><a href="#探究" class="headerlink" title="探究"></a>探究</h3><ol>
+<li><p>初始化p</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VBPlanet *p = [VBPlanet alloc];</span><br></pre></td></tr></table></figure></li>
+<li><p>输入调试命令中<code>x/4gx p</code></p>
+<blockquote>
+<p>0x600003b22040: 0x0100000104a995c1 0x0000000000000000<br>0x600003b22050: 0x0000000000000000 0x0000000000000000</p>
+</blockquote>
+</li>
+<li><p>输入<code>p/x 0x0100000104a995c1 &amp; 0x007ffffffffffff8ULL</code></p>
+<blockquote>
+<p>(unsigned long long) $1 &#x3D; 0x0000000104a995c0</p>
+</blockquote>
+</li>
+<li><p>输入<code>po 0x0000000104a995c0</code></p>
+<blockquote>
+<p>VBPlanet</p>
+</blockquote>
+</li>
+<li><p>查看一下p对象isa指针指向的类对象内存地址<br>(lldb) x&#x2F;4gx p<br>0x600001755920: 0x01000001021255c1 0x0000000000000000<br>0x600001755930: 0x0000000000000000 0x0000000000000000<br>(lldb) p&#x2F;x 0x01000001021255c1 &amp; 0x007ffffffffffff8ULL<br>(unsigned long long) $1 &#x3D; 0x00000001021255c0<br>(lldb) po 0x00000001021255c0<br>VBPlanet</p>
+</li>
+<li><p>查看一下VBPlanet对象isa指针指向的元类对象内存地址<br>(lldb) x&#x2F;4gx 0x00000001021255c0<br>0x1021255c0: 0x0000000102125598 0x00000001027ec310<br>0x1021255d0: 0x0003600000c54440 0x0002803100000000<br>(lldb) p&#x2F;x 0x0000000102125598 &amp; 0x007ffffffffffff8ULL<br>(unsigned long long) $3 &#x3D; 0x0000000102125598<br>(lldb) po 0x0000000102125598<br>VBPlanet</p>
+</li>
+<li><p>查看一下VBPlanet元类对象isa指针指向的根元类地址<br>(lldb) x&#x2F;4gx 0x0000000102125598<br>0x102125598: 0x00000001027ec2c0 0x00000001027ec2c0<br>0x1021255a8: 0x000160000194ad20 0x0002e03500000000<br>(lldb) p&#x2F;x 0x00000001027ec2c0 &amp; 0x007ffffffffffff8ULL<br>(unsigned long long) $5 &#x3D; 0x00000001027ec2c0<br>(lldb) po 0x00000001027ec2c0<br>NSObject</p>
+</li>
+<li><p>查看一下NSObject类对象isa指向的根元类地址<br>(lldb) p&#x2F;x NSObject.class<br>(Class) $7 &#x3D; 0x00000001027ec310 NSObject<br>(lldb) x&#x2F;4gx 0x00000001027ec310<br>0x1027ec310: 0x00000001027ec2c0 0x0000000000000000<br>0x1027ec320: 0x000f600002540400 0x0009801000000000<br>(lldb) p&#x2F;x 0x00000001027ec2c0 &amp; 0x007ffffffffffff8ULL<br>(unsigned long long) $8 &#x3D; 0x00000001027ec2c0<br>(lldb) po 0x00000001027ec2c0<br>NSObject</p>
+</li>
+<li><p>查看一下根元类对象isa指针指向的地址<br>(lldb) x&#x2F;4gx 0x00000001027ec2c0<br>0x1027ec2c0: 0x00000001027ec2c0 0x00000001027ec310<br>0x1027ec2d0: 0x000f600002574000 0x0005e03400000000<br>(lldb)</p>
+</li>
+</ol>
+<h3 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h3><p>实例对象 isa -&gt; 类对象 isa -&gt; 元类对象 isa -&gt; 根元类<br>NSObject isa -&gt; 根元类<br>根元类 isa  -&gt; 根元类自身</p>
+<h2 id="类与元类关系"><a href="#类与元类关系" class="headerlink" title="类与元类关系"></a>类与元类关系</h2><h3 id="探究-1"><a href="#探究-1" class="headerlink" title="探究"></a>探究</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// NSObject实例对象</span><br><span class="line"> NSObject *object1 = [NSObject alloc];</span><br><span class="line"> // NSObject类对象</span><br><span class="line"> Class class = object_getClass(object1);</span><br><span class="line"> // NSObject元类(根元类)</span><br><span class="line"> Class metaClass = object_getClass(class);</span><br><span class="line"> </span><br><span class="line"> NSLog(@&quot;NSObject实例对象:%p&quot;,object1);</span><br><span class="line"> NSLog(@&quot;NSObject类对象:%p&quot;,class);</span><br><span class="line"> NSLog(@&quot;NSObject元类(根元类):%p&quot;,metaClass);</span><br><span class="line"> </span><br><span class="line"> // VBPlanet  -- 元类的父类就是父类的元类</span><br><span class="line"> Class pMetaClass = objc_getMetaClass(&quot;VBPlanet&quot;);</span><br><span class="line"> Class psuperClass = class_getSuperclass(pMetaClass);</span><br><span class="line"> NSLog(@&quot;%@ - %p&quot;,pMetaClass,pMetaClass);</span><br><span class="line"> NSLog(@&quot;%@ - %p&quot;,psuperClass,psuperClass);</span><br><span class="line"> </span><br><span class="line"> // VBMars继承自VBPlanet</span><br><span class="line"> // VBMars元类的父类 就是 VBPlanet(VBPlanet的元类)</span><br><span class="line"> Class tMetaClass = objc_getMetaClass(&quot;VBMars&quot;);</span><br><span class="line"> Class tsuperClass = class_getSuperclass(tMetaClass);</span><br><span class="line"> NSLog(@&quot;%@ - %p&quot;,tsuperClass,tsuperClass);</span><br><span class="line"> </span><br><span class="line"> // NSObject的父类</span><br><span class="line"> Class nsuperClass = class_getSuperclass(NSObject.class);</span><br><span class="line"> NSLog(@&quot;%@ - %p&quot;,nsuperClass,nsuperClass);</span><br><span class="line"> </span><br><span class="line"> // 根元类的父类 -- NSObject</span><br><span class="line"> Class rnsuperClass = class_getSuperclass(metaClass);</span><br><span class="line"> NSLog(@&quot;%@ - %p&quot;,rnsuperClass,rnsuperClass);</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<blockquote>
+<p>2022-05-11 00:53:27.319866+0800 002-isa分析[30177:12457698] NSObject实例对象:0x1062a8030<br>2022-05-11 00:53:27.320081+0800 002-isa分析[30177:12457698] NSObject类对象:0x1de196eb0<br>2022-05-11 00:53:27.320099+0800 002-isa分析[30177:12457698] NSObject元类(根元类):0x1de196e60<br>2022-05-11 00:53:27.320116+0800 002-isa分析[30177:12457698] VBPlanet - 0x1000082c8<br>2022-05-11 00:53:27.320130+0800 002-isa分析[30177:12457698] NSObject - 0x1de196e60<br>2022-05-11 00:53:27.320141+0800 002-isa分析[30177:12457698] VBPlanet - 0x1000082c8<br>2022-05-11 00:53:27.320152+0800 002-isa分析[30177:12457698] (null) - 0x0<br>2022-05-11 00:53:27.320218+0800 002-isa分析[30177:12457698] NSObject - 0x1de196eb0</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>借助一张图来总结：</p>
+<p><img src="http://img-cdn.visionbao.com/mweb/16522021366801.jpg?imageView2/0/interlace/1/q/100%7Cwatermark/2/text/YmxvZy5WaXNpb25CYW8uY29t/font/5a6L5L2T/fontsize/240/fill/IzA4MDgwOA==/dissolve/50/gravity/SouthEast/dx/10/dy/10"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">VisionBao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.visionbao.com/2a05b6b9b238/">http://blog.visionbao.com/2a05b6b9b238/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.visionbao.com" target="_blank">OrcaHub</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/e62f19441a07/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">11.类的组成</div></div></a></div><div class="next-post pull-right"><a href="/3dd1e13fba70/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">9.通过isa指针获取类对象内存地址</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#10-isa%E6%8C%87%E5%90%91%E5%88%86%E6%9E%90-amp-%E7%B1%BB%E4%B8%8E%E5%85%83%E7%B1%BB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">10.isa指向分析&amp;类与元类的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.0.1.</span> <span class="toc-text">准备工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#isa%E6%8C%87%E5%90%91%E5%88%86%E6%9E%90"><span class="toc-number">1.1.</span> <span class="toc-text">isa指向分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%B1%BB%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">获取类的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A2%E7%A9%B6"><span class="toc-number">1.1.2.</span> <span class="toc-text">探究</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="toc-number">1.1.3.</span> <span class="toc-text">小结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E4%B8%8E%E5%85%83%E7%B1%BB%E5%85%B3%E7%B3%BB"><span class="toc-number">1.2.</span> <span class="toc-text">类与元类关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A2%E7%A9%B6-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">探究</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2022 By VisionBao</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Algolia</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://blog.visionbao.com/2a05b6b9b238/'
+    this.page.identifier = '2a05b6b9b238/'
+    this.page.title = '10.isa指向分析&类与元类的关系'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://VisionBao.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+}
+
+if ('Disqus' === 'Disqus' || !false) {
+  if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script>(function(d, w, c) {
+    w.ChatraID = 'YEPsYbxmjrLr47pPe';
+    var s = d.createElement('script');
+    w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+    };
+    s.async = true;
+    s.src = 'https://call.chatra.io/chatra.js';
+    if (d.head) d.head.appendChild(s);
+})(document, window, 'Chatra');
+
+if (true) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      Chatra('openChat')
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      Chatra('hide')
+    }
+    function chatBtnShow () {
+      Chatra('show')
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
